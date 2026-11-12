@@ -1,0 +1,571 @@
+{
+  "product": {
+    "Brand Desc": "A ONE",
+    "Brand ID": "1A",
+    "Wrapper": "AONE",
+    "Grade Spec": "PPTWA070TP",
+    "Size": "A4",
+    "GSM": "70",
+    "Ream/Pallet": "300",
+    "Packs/Box": "5",
+    "Boxes/Plt": "60",
+    "SKU": "40506060",
+    "Ukuran Pallet (WxLxH)": "97 X 113 X 110 CM",
+    "Pallet WxL": "96.5x113",
+    "Country": "Non Japan",
+    "Jenis Wrapper": "PET",
+    "SKU Japan": null
+  },
+  "materials": [
+    {
+      "category": "Wrapper",
+      "items": [
+        {
+          "name": "Col Wrapper (CM)",
+          "value": "38,2",
+          "unitPrice": null
+        },
+        {
+          "name": "Lambung Wrapper",
+          "value": "198",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat Wrapper (Kg)",
+          "value": "0,0197",
+          "unitPrice": null
+        },
+        {
+          "name": "Nomat wrapper",
+          "value": "40506060",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat Glue Wrapper (Kg)",
+          "value": "0,000524815",
+          "unitPrice": null
+        },
+        {
+          "name": "USD/KG Glue Wrapper",
+          "value": "4,83",
+          "unitPrice": "4.83"
+        },
+        {
+          "name": "$Glue Wrapper",
+          "value": "0,002534855",
+          "unitPrice": "0.002534855"
+        },
+        {
+          "name": "Nomat Glue Wrapper",
+          "value": "20990768",
+          "unitPrice": null
+        }
+      ]
+    },
+    {
+      "category": "Bottom & Top",
+      "items": [
+        {
+          "name": "Lambung Bottom",
+          "value": "031N",
+          "unitPrice": null
+        },
+        {
+          "name": "Nomat Bottom",
+          "value": "50321519",
+          "unitPrice": null
+        },
+        {
+          "name": "$Bottom ($/PC)",
+          "value": "0,13273",
+          "unitPrice": "0.13273"
+        },
+        {
+          "name": "Lambung Top",
+          "value": "A57",
+          "unitPrice": null
+        },
+        {
+          "name": "Nomat Top",
+          "value": "50348858",
+          "unitPrice": null
+        },
+        {
+          "name": "$Top",
+          "value": "0,094319786",
+          "unitPrice": "0.094319786"
+        },
+        {
+          "name": "Berat Bottom",
+          "value": "0,298",
+          "unitPrice": null
+        },
+        {
+          "name": "Asal",
+          "value": "BU 17",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat Top",
+          "value": "0,109",
+          "unitPrice": null
+        },
+        {
+          "name": "Full/Half Bottom",
+          "value": "Half Bottom",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat Glue Bottom",
+          "value": "0,001649",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat Glue Top",
+          "value": "0,000945",
+          "unitPrice": null
+        },
+        {
+          "name": "Nomat Glue",
+          "value": "20068431",
+          "unitPrice": null
+        }
+      ]
+    },
+    {
+      "category": "Stiker",
+      "items": [
+        {
+          "name": "Adding Stiker",
+          "value": "-",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat Stiker",
+          "value": "-",
+          "unitPrice": null
+        },
+        {
+          "name": "Nomat Stiker",
+          "value": "-",
+          "unitPrice": null
+        }
+      ]
+    },
+    {
+      "category": "Strapping",
+      "items": [
+        {
+          "name": "Warna Strapping",
+          "value": "Putih",
+          "unitPrice": null
+        },
+        {
+          "name": "Posisi Strapping",
+          "value": "Panjang",
+          "unitPrice": null
+        },
+        {
+          "name": "Jumlah Strapping",
+          "value": "1",
+          "unitPrice": null
+        },
+        {
+          "name": "Panjang Strapping",
+          "value": "111,59",
+          "unitPrice": null
+        },
+        {
+          "name": "Panjang total Strapping",
+          "value": "111,59",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat Strapping",
+          "value": "0,003928",
+          "unitPrice": null
+        },
+        {
+          "name": "Strapping (USD/Roll) Blue,Gray (USD/KG)",
+          "value": "22,63",
+          "unitPrice": "22.63"
+        },
+        {
+          "name": "$Strapping Band",
+          "value": "0,009352895",
+          "unitPrice": "0.009352895"
+        },
+        {
+          "name": "Nomat Strapping",
+          "value": "20408622",
+          "unitPrice": null
+        }
+      ]
+    },
+    {
+      "category": "Siku",
+      "items": [
+        {
+          "name": "Jumlah Siku",
+          "value": "4 Samping + 2 Atas",
+          "unitPrice": null
+        },
+        {
+          "name": "Ukur. Siku Samping",
+          "value": "100 X 15",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat Siku Samping",
+          "value": "0,48",
+          "unitPrice": null
+        },
+        {
+          "name": "Nomat Siku Samping",
+          "value": "50307378",
+          "unitPrice": null
+        },
+        {
+          "name": "$Siku Samping",
+          "value": "0,050660494",
+          "unitPrice": "0.050660494"
+        },
+        {
+          "name": "Ukur. Siku Atas",
+          "value": "100 X 15",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat Siku Atas",
+          "value": "0,24",
+          "unitPrice": null
+        },
+        {
+          "name": "Nomat Siku Atas",
+          "value": "50307378",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat Siku Total",
+          "value": "0,72",
+          "unitPrice": null
+        },
+        {
+          "name": "$Siku Atas",
+          "value": "0,050660494",
+          "unitPrice": "0.050660494"
+        }
+      ]
+    },
+    {
+      "category": "Layer & Slipsheet",
+      "items": [
+        {
+          "name": "Uk. Layer Kraft",
+          "value": "96 X 113",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat Layer Kraft",
+          "value": "0,1089",
+          "unitPrice": null
+        },
+        {
+          "name": "$Layer Kraft(USD/Kg)",
+          "value": "0,622568982",
+          "unitPrice": "0.622568982"
+        },
+        {
+          "name": "Nomat Layer Kraft",
+          "value": "40554329",
+          "unitPrice": null
+        },
+        {
+          "name": "Uk. Slipsheet",
+          "value": "-",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat Slipsheet",
+          "value": "-",
+          "unitPrice": null
+        },
+        {
+          "name": "$slipsheet",
+          "value": "-",
+          "unitPrice": null
+        },
+        {
+          "name": "Nomat Slipsheet",
+          "value": "-",
+          "unitPrice": null
+        }
+      ]
+    },
+    {
+      "category": "Chipboard",
+      "items": [
+        {
+          "name": "Uk.Chipboard (cm)",
+          "value": "13X10",
+          "unitPrice": null
+        },
+        {
+          "name": "Jumlah Chipboard",
+          "value": "6",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat Chipboard",
+          "value": "0,0315135",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat Chipboard total",
+          "value": "0,189081",
+          "unitPrice": null
+        },
+        {
+          "name": "Nomat Chipboard",
+          "value": "21052239",
+          "unitPrice": null
+        },
+        {
+          "name": "$Chipboard($/PC)",
+          "value": "0,02",
+          "unitPrice": "0.02"
+        }
+      ]
+    },
+    {
+      "category": "Stretchfilm",
+      "items": [
+        {
+          "name": "Jumlah Lilitan",
+          "value": "6",
+          "unitPrice": null
+        },
+        {
+          "name": "Micron Stretchfilm",
+          "value": "20",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat Stretchfilm",
+          "value": "0,465",
+          "unitPrice": null
+        },
+        {
+          "name": "Nomat Stretchfilm",
+          "value": "20617795",
+          "unitPrice": null
+        },
+        {
+          "name": "$Stretchfilm",
+          "value": "0,902100184",
+          "unitPrice": "0.902100184"
+        }
+      ]
+    },
+    {
+      "category": "Packing",
+      "items": [
+        {
+          "name": "Panjang Packing",
+          "value": "399",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat Total Packing",
+          "value": "0,03019",
+          "unitPrice": null
+        },
+        {
+          "name": "Jumlah packing",
+          "value": "3",
+          "unitPrice": null
+        },
+        {
+          "name": "Nomat Packing",
+          "value": "20391381",
+          "unitPrice": null
+        },
+        {
+          "name": "$Packing(USD/ROLL)",
+          "value": "28,75",
+          "unitPrice": "28.75"
+        }
+      ]
+    },
+    {
+      "category": "Plastic Layer",
+      "items": [
+        {
+          "name": "Plastic Layer",
+          "value": "1",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat Plastic Layer",
+          "value": "0,0349",
+          "unitPrice": null
+        },
+        {
+          "name": "Nomat Plastic Layer",
+          "value": "20306123",
+          "unitPrice": null
+        },
+        {
+          "name": "$Plastic",
+          "value": "1,74",
+          "unitPrice": "1.74"
+        }
+      ]
+    },
+    {
+      "category": "Pallet",
+      "items": [
+        {
+          "name": "Jenis Pallet",
+          "value": "Barcelona",
+          "unitPrice": null
+        },
+        {
+          "name": "Uk. Pallet",
+          "value": "97 X 113",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat Pallet",
+          "value": "13",
+          "unitPrice": null
+        },
+        {
+          "name": "Nomat Pallet",
+          "value": "20994292",
+          "unitPrice": null
+        },
+        {
+          "name": "$Pallet(USD/PC)",
+          "value": "4,9",
+          "unitPrice": "4.9"
+        }
+      ]
+    },
+    {
+      "category": "Double Wall",
+      "items": [
+        {
+          "name": "Uk. Double wall",
+          "value": "96 X 112",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat Double Wall",
+          "value": "1,044",
+          "unitPrice": null
+        },
+        {
+          "name": "Nomat Double Wall",
+          "value": "50316474",
+          "unitPrice": null
+        },
+        {
+          "name": "$Doublewall",
+          "value": "0,21006",
+          "unitPrice": "0.21006"
+        }
+      ]
+    },
+    {
+      "category": "ADH Tape",
+      "items": [
+        {
+          "name": "ADH Tape",
+          "value": "ADH.TAPE;OPP,1S,48W,100L,N,TRA,B",
+          "unitPrice": null
+        },
+        {
+          "name": "Panjang ADH Tape",
+          "value": "34",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat ADH Tape",
+          "value": "0,000504",
+          "unitPrice": null
+        },
+        {
+          "name": "Nomat ADH Tape",
+          "value": "20096711",
+          "unitPrice": null
+        },
+        {
+          "name": "$ADH TAPE (USD/ROLL)",
+          "value": "0,49",
+          "unitPrice": "0.49"
+        }
+      ]
+    },
+    {
+      "category": "Lainnya",
+      "items": [
+        {
+          "name": "Bendera",
+          "value": "PEFC X 2",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat Bendera",
+          "value": "0,00912",
+          "unitPrice": null
+        },
+        {
+          "name": "Nomat Bendera",
+          "value": "40551716",
+          "unitPrice": null
+        },
+        {
+          "name": "$Bendera",
+          "value": "-",
+          "unitPrice": null
+        },
+        {
+          "name": "Inspection Card",
+          "value": "2",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat IC",
+          "value": "0,00978",
+          "unitPrice": null
+        },
+        {
+          "name": "Nomat IC",
+          "value": "40551716",
+          "unitPrice": null
+        },
+        {
+          "name": "Shipping Pallet",
+          "value": "-",
+          "unitPrice": null
+        },
+        {
+          "name": "Nomat Shipping Pallet",
+          "value": "-",
+          "unitPrice": null
+        },
+        {
+          "name": "QR PPWR",
+          "value": "2",
+          "unitPrice": null
+        },
+        {
+          "name": "Berat QR",
+          "value": "0,00526",
+          "unitPrice": null
+        }
+      ]
+    }
+  ]
+}

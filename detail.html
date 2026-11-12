@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f6f7">
+  <title>Detail Packaging · A ONE A4 70 gsm</title>
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('ppc-theme') || 'light';
+        document.documentElement.dataset.theme = t;
+        document.documentElement.style.colorScheme = t === 'dark' ? 'dark' : 'light';
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">PPC<span>.</span> CATALOG</a>
+    <div class="header-tools">
+      <button type="button" class="button secondary" id="btn-login">Login</button>
+      <button type="button" class="button" id="btn-logout" hidden>Logout</button>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Ganti tema">☾ Mode gelap</button>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <a class="back-link" href="product.html">← Kembali ke produk</a>
+
+    <div class="detail-page-heading">
+      <div class="eyebrow">Kemasan · A ONE</div>
+      <h1>Detail Packaging</h1>
+      <p class="lead">Artwork die-cut, tatanan layer pallet, dan Bill of Materials.</p>
+    </div>
+
+    <section class="design-section">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Artwork & pemeriksaan</div>
+          <h2>Die Cut</h2>
+        </div>
+        <span class="section-chip">Design preview</span>
+      </div>
+      <div class="artwork-grid">
+        <figure class="artwork-card">
+          <figcaption><strong>Wrapper ream</strong><span>Diecut 2D</span></figcaption>
+          <div class="magnify-frame">
+            <img class="magnify-image" src="wrapper.jpeg" alt="Artwork wrapper ream" loading="lazy">
+          </div>
+        </figure>
+        <figure class="artwork-card">
+          <figcaption><strong>Carton box</strong><span>Diecut 2D</span></figcaption>
+          <div class="magnify-frame">
+            <img class="magnify-image" src="Box.jpeg" alt="Artwork carton box" loading="lazy">
+          </div>
+        </figure>
+      </div>
+
+      <figure class="artwork-card barcode-card">
+        <figcaption><strong>Barcode &amp; sertifikasi brand</strong><span>Elemen cetak</span></figcaption>
+        <div class="magnify-frame barcode-frame">
+          <img class="magnify-image" src="barcode.png" alt="Barcode, PEFC, ISO, SVLK dan komitmen deforestasi A ONE" loading="lazy">
+        </div>
+      </figure>
+    </section>
+
+    <section class="design-section">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Struktur kemasan</div>
+          <h2>Tatanan Box pada Pallet</h2>
+          <p>Layout 2D vertikal tiap layer. Total 60 carton · 4 layer · 15 carton per layer (susunan sama).</p>
+        </div>
+      </div>
+
+      <div class="layer-controls" role="tablist" aria-label="Pilih layer">
+        <button type="button" class="button layer-btn is-active" data-layer="1" role="tab" aria-selected="true">Layer 1</button>
+        <button type="button" class="button layer-btn" data-layer="2" role="tab" aria-selected="false">Layer 2</button>
+        <button type="button" class="button layer-btn" data-layer="3" role="tab" aria-selected="false">Layer 3</button>
+        <button type="button" class="button layer-btn" data-layer="4" role="tab" aria-selected="false">Layer 4</button>
+      </div>
+
+      <div class="layer-stage">
+        <div class="layer-canvas" id="layer-canvas" aria-live="polite"></div>
+      </div>
+      <p class="muted layer-caption" id="layer-caption">Menampilkan Layer 1 · 15 carton (3 × 5)</p>
+    </section>
+
+    <!-- <section class="material-section" id="material-section">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Bill of Materials</div>
+          <h2>Material yang dibutuhkan</h2>
+          <p>Daftar spesifikasi material. Harga dan nomor material hanya tampil setelah login.</p>
+        </div>
+        <button class="button primary" id="material-toggle" type="button" aria-expanded="true">Sembunyikan daftar material</button>
+      </div>
+      <div class="product-meta" id="product-meta"></div>
+      <div class="material-body" id="material-body">
+        <p class="muted">Memuat data material…</p>
+      </div>
+    </section> -->
+  </main>
+
+  <div class="login-overlay" id="login-overlay" aria-hidden="true">
+    <div class="login-modal" role="dialog" aria-labelledby="login-title" aria-modal="true">
+      <h2 id="login-title">Login Data Sensitif</h2>
+      <p class="muted">Masukkan kredensial untuk menampilkan <strong>harga</strong> dan <strong>nomor material (Nomat)</strong>.</p>
+      <form id="login-form" autocomplete="on">
+        <label for="login-user">Username</label>
+        <input type="text" id="login-user" name="username" autocomplete="username" required placeholder="ppc">
+        <label for="login-pass">Password</label>
+        <input type="password" id="login-pass" name="password" autocomplete="current-password" required placeholder="••••••••">
+        <p class="error-message" id="login-error" hidden>Username atau password salah.</p>
+        <div class="login-actions">
+          <button type="submit" class="button primary">Masuk</button>
+          <button type="button" class="button" id="login-cancel">Batal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">PPC Product Catalog · Detail Packaging</footer>
+  <script src="scripts.js"></script>
+</body>
+</html>

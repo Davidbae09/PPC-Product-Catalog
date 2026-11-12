@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f6f7">
+  <title>PPC | Product Catalog</title>
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('ppc-theme') || 'light';
+        document.documentElement.dataset.theme = t;
+        document.documentElement.style.colorScheme = t === 'dark' ? 'dark' : 'light';
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">PPC<span>.</span> CATALOG</a>
+    <div class="header-tools">
+      <button class="theme-toggle" id="theme-toggle" type="button">☾ Mode gelap</button>
+    </div>
+  </header>
+
+  <main class="page-shell index-shell">
+    <section class="brand-grid">
+      <article class="brand-card">
+        <div class="brand-card-head">
+          <img class="brand-logo-img" src="Logo-AOne.png" alt="A ONE logo" width="120" height="48">
+          <span class="section-chip">Brand</span>
+        </div>
+
+        <h2 class="brand-name">A ONE</h2>
+
+        <div class="brand-ream-thumb">
+          <img src="aone.jpg" alt="Pratinjau ream A ONE">
+        </div>
+
+        <div class="spec-picker">
+          <label for="size-select">Ukuran</label>
+          <select id="size-select">
+            <option value="A4">A4</option>
+          </select>
+          <label for="gsm-select">Gramatur</label>
+          <select id="gsm-select">
+            <option value="70">70 gsm</option>
+          </select>
+          <a class="button primary block-button" id="open-product" href="product.html">Buka katalog produk →</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">PPC Product Catalog</footer>
+  <script src="scripts.js"></script>
+</body>
+</html>

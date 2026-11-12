@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f6f7">
+  <title>A ONE A4 70 gsm | PPC Product Catalog</title>
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('ppc-theme') || 'light';
+        document.documentElement.dataset.theme = t;
+        document.documentElement.style.colorScheme = t === 'dark' ? 'dark' : 'light';
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">PPC<span>.</span> CATALOG</a>
+    <div class="header-tools">
+      <button type="button" class="button secondary" id="btn-login">Login</button>
+      <button type="button" class="button" id="btn-logout" hidden>Logout</button>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Ganti tema">☾ Mode gelap</button>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <a class="back-link" href="index.html">← Kembali ke katalog</a>
+
+    <section class="hero-section">
+      <div class="hero-visual">
+        <img src="aone.jpg" alt="Ream A ONE dibungkus wrapper" class="hero-ream-img">
+      </div>
+      <div class="hero-content">
+        <div class="hero-logo">
+          <img class="hero-brand-logo" src="Logo-AOne.png" alt="AOne">
+        </div>
+
+        <p class="hero-slogan" id="hero-slogan" aria-live="polite"></p>
+
+        <div class="cert-block">
+          <div class="cert-heading">Certification</div>
+          <div class="cert-list cert-images" aria-label="Sertifikasi produk">
+            <img src="Tanda SVLK Tjiwi Kimia-001 Color (1).png" alt="SVLK Indonesia" title="SVLK">
+            <img src="certification-indonesian-legal-wood.jpg" alt="Indonesian Legal Wood" title="Indonesian Legal Wood">
+            <img src="certification-iso-9706.jpg" alt="ISO 9706" title="ISO 9706">
+            <img src="certification-iso-14001.jpg" alt="ISO 14001" title="ISO 14001">
+            <img src="Logo ISO 45001 Black (1).png" alt="ISO 45001" title="ISO 45001">
+            <img src="certification-PEFC.jpg" alt="PEFC" title="PEFC">
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a class="button primary" href="detail.html">Detail Packaging</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="product-grid" aria-label="Visualisasi produk">
+      <article class="product-card">
+        <div class="card-visual">
+          <div class="visual-label">01 · REAM</div>
+          <model-viewer
+            id="ream"
+            src="REAM.glb"
+            alt="Model 3D ream A ONE"
+            camera-controls
+            shadow-intensity="1"
+            exposure="0.7"
+            tone-mapping="commerce"
+            touch-action="pan-y">
+          </model-viewer>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <div class="card-visual">
+          <div class="visual-label">02 · BOX</div>
+          <model-viewer
+            id="carton"
+            src="carton.glb"
+            alt="Model 3D carton A ONE"
+            camera-controls
+            shadow-intensity="1"
+            exposure="0.7"
+            tone-mapping="commerce"
+            touch-action="pan-y">
+          </model-viewer>
+        </div>
+      </article>
+
+      <article class="product-card pallet-card">
+        <div class="card-visual">
+          <div class="visual-label">03 · PALLET</div>
+          <model-viewer
+            id="pallet"
+            src="pallet.glb"
+            alt="Model 3D pallet A ONE"
+            camera-controls
+            shadow-intensity="1"
+            exposure="0.7"
+            tone-mapping="commerce"
+            touch-action="pan-y">
+          </model-viewer>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <div class="login-overlay" id="login-overlay" aria-hidden="true">
+    <div class="login-modal" role="dialog" aria-labelledby="login-title" aria-modal="true">
+      <h2 id="login-title">Login Data Sensitif</h2>
+      <p class="muted">Masukkan kredensial untuk menampilkan <strong>harga</strong> dan <strong>nomor material (Nomat)</strong> di halaman Detail Packaging.</p>
+      <form id="login-form" autocomplete="on">
+        <label for="login-user">Username</label>
+        <input type="text" id="login-user" name="username" autocomplete="username" required placeholder="ppc">
+        <label for="login-pass">Password</label>
+        <input type="password" id="login-pass" name="password" autocomplete="current-password" required placeholder="••••••••">
+        <p class="error-message" id="login-error" hidden>Username atau password salah.</p>
+        <div class="login-actions">
+          <button type="submit" class="button primary">Masuk</button>
+          <button type="button" class="button" id="login-cancel">Batal</button>
+        </div>
+      </form>
+      <p class="login-hint muted">Demo — username: <code>ppc</code> &nbsp;·&nbsp; password: <code>catalog2024</code></p>
+    </div>
+  </div>
+
+  <footer class="site-footer">PPC Product Catalog · A ONE A4 70 gsm</footer>
+  <script src="scripts.js"></script>
+</body>
+</html>

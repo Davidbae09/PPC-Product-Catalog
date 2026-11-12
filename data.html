@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug GLB REAM | PPC Product Catalog</title>
+
+    <script type="module"
+        src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
+    </script>
+
+    <style>
+        :root {
+            --bg: #f5f6f7;
+            --surface: #ffffff;
+            --text: #20252b;
+            --muted: #69727d;
+            --line: #e3e7eb;
+            --accent: #b51f2b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 15px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 30px;
+            background: white;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .brand {
+            font-weight: 800;
+            letter-spacing: .08em;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .brand span {
+            color: var(--accent);
+        }
+
+        main {
+            width: min(1400px, calc(100% - 40px));
+            margin: 32px auto 60px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 22px;
+            color: var(--muted);
+            text-decoration: none;
+        }
+
+        .eyebrow {
+            font-size: 11px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        h1 {
+            margin: 5px 0 8px;
+            font-size: clamp(28px, 4vw, 42px);
+        }
+
+        .lead,
+        .muted {
+            color: var(--muted);
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 24px 0 18px;
+            padding: 15px;
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+        }
+
+        .toolbar-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        input {
+            padding: 10px 12px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            font: inherit;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            background: #252a30;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fill,
+                minmax(min(100%, 360px), 1fr)
+            );
+            gap: 18px;
+        }
+
+        .card {
+            overflow: hidden;
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            min-width: 0;
+        }
+
+        .card-head,
+        .card-foot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+        }
+
+        .card-head {
+            border-bottom: 1px solid var(--line);
+        }
+
+        .card-foot {
+            border-top: 1px solid var(--line);
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .filename {
+            font: 12px Consolas, monospace;
+            color: var(--muted);
+            overflow-wrap: anywhere;
+            text-align: right;
+        }
+
+        model-viewer {
+            display: block;
+            width: 100%;
+            height: 330px;
+            background: linear-gradient(
+                145deg,
+                #fafbfc,
+                #edf0f3
+            );
+        }
+
+        .empty {
+            grid-column: 1 / -1;
+            padding: 30px;
+            text-align: center;
+            background: white;
+            border: 1px dashed #cbd2d9;
+            border-radius: 12px;
+            color: var(--muted);
+        }
+
+        .error {
+            color: #b42318;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-top: 28px;
+            flex-wrap: wrap;
+        }
+
+        .pagination .page-info {
+            font-size: 14px;
+            color: var(--muted);
+            min-width: 140px;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        code {
+            background: #eef0f2;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+
+        @media(max-width: 600px) {
+            main {
+                width: calc(100% - 24px);
+            }
+
+            header {
+                padding: 15px 18px;
+            }
+
+            model-viewer {
+                height: 280px;
+            }
+
+            input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a class="brand" href="index.html">
+        PPC<span>.</span> CATALOG
+    </a>
+
+    <span class="muted">DEBUG VIEWER · REAM</span>
+</header>
+
+<main>
+
+    <a class="back" href="product.html">
+        ← Kembali ke katalog produk
+    </a>
+
+    <div class="eyebrow">
+        Pemeriksaan model 3D
+    </div>
+
+    <h1>Daftar GLB REAM</h1>
+
+    <p class="lead">
+        Menampilkan semua file die_cut_page_*.glb
+        dari folder output_glbs.
+    </p>
+
+    <section class="toolbar">
+
+        <div class="toolbar-group">
+            <strong id="count">
+                0 model ditemukan
+            </strong>
+
+            <span class="muted" id="status">
+                Membaca direktori...
+            </span>
+        </div>
+
+        <div class="toolbar-group">
+
+            <input
+                id="search"
+                type="search"
+                placeholder="Cari nama file..."
+                aria-label="Cari nama file"
+            >
+
+            <button id="reload" type="button">
+                Muat ulang
+            </button>
+
+        </div>
+
+    </section>
+
+    <section class="grid" id="grid" aria-live="polite">
+
+        <div class="empty">
+            Sedang membaca folder output_glbs...
+        </div>
+
+    </section>
+
+    <!-- Pagination controls -->
+    <nav class="pagination" id="pagination" hidden>
+        <button id="prevPage" type="button">← Sebelumnya</button>
+        <span class="page-info" id="pageInfo">Halaman 1 / 1</span>
+        <button id="nextPage" type="button">Berikutnya →</button>
+    </nav>
+
+</main>
+
+<footer>
+    PPC Product Catalog · Temporary GLB Debugging Page
+</footer>
+
+<script>
+
+// =====================================================
+// KONFIGURASI
+// =====================================================
+
+const FOLDER = './output_glbs/';
+const PREFIX = 'die_cut_page_';
+const PER_PAGE = 6;   // ← batasi 9 model per halaman
+
+const grid = document.getElementById('grid');
+const countEl = document.getElementById('count');
+const statusEl = document.getElementById('status');
+const searchEl = document.getElementById('search');
+const reloadBtn = document.getElementById('reload');
+const paginationEl = document.getElementById('pagination');
+const prevBtn = document.getElementById('prevPage');
+const nextBtn = document.getElementById('nextPage');
+const pageInfoEl = document.getElementById('pageInfo');
+
+// State
+let allFiles = [];        // semua file dari direktori
+let filteredFiles = [];   // hasil filter search
+let currentPage = 1;
+
+
+// =====================================================
+// MEMBACA DIREKTORI OUTPUT_GLBS
+// =====================================================
+
+async function getDirectoryFiles() {
+
+    const response = await fetch(FOLDER, {
+        cache: 'no-store'
+    });
+
+    if (!response.ok) {
+        throw new Error(
+            `Direktori tidak dapat dibaca (HTTP ${response.status})`
+        );
+    }
+
+    const html = await response.text();
+
+    const doc = new DOMParser().parseFromString(
+        html,
+        'text/html'
+    );
+
+    const files = [...doc.querySelectorAll('a[href]')]
+
+        .map(a => {
+
+            try {
+
+                const url = new URL(
+                    a.getAttribute('href'),
+                    location.href
+                );
+
+                return decodeURIComponent(
+                    url.pathname.split('/').filter(Boolean).pop() || ''
+                );
+
+            } catch {
+                return '';
+            }
+
+        })
+
+        .filter(name => {
+
+            return (
+                name.startsWith(PREFIX) &&
+                name.toLowerCase().endsWith('.glb') &&
+                /^die_cut_page_\d+\.glb$/i.test(name)
+            );
+
+        })
+
+        .filter((name, index, array) => {
+            return array.indexOf(name) === index;
+        })
+
+        .sort((a, b) => {
+
+            return a.localeCompare(
+                b,
+                undefined,
+                {
+                    numeric: true,
+                    sensitivity: 'base'
+                }
+            );
+
+        });
+
+    return files;
+}
+
+
+// =====================================================
+// MEMBUAT KARTU MODEL 3D
+// =====================================================
+
+function createCard(filename, index) {
+
+    const card = document.createElement('article');
+
+    card.className = 'card';
+
+    card.dataset.filename = filename.toLowerCase();
+
+
+    // HEADER
+
+    const head = document.createElement('div');
+
+    head.className = 'card-head';
+
+    const title = document.createElement('strong');
+
+    title.textContent = `REAM · Die Cut ${index + 1}`;
+
+    const name = document.createElement('span');
+
+    name.className = 'filename';
+
+    name.textContent = filename;
+
+    head.append(title, name);
+
+
+    // MODEL VIEWER
+
+    const viewer = document.createElement('model-viewer');
+
+    viewer.src = FOLDER + encodeURIComponent(filename);
+
+    viewer.alt = `Preview 3D ${filename}`;
+
+    viewer.setAttribute('camera-controls', '');
+
+    viewer.setAttribute('auto-rotate', '');
+
+    viewer.setAttribute('shadow-intensity', '1');
+
+    viewer.setAttribute('exposure', '1');
+
+    viewer.setAttribute('tone-mapping', 'commerce');
+
+    viewer.setAttribute('touch-action', 'pan-y');
+
+    viewer.setAttribute('loading', 'lazy');
+
+
+    // FOOTER
+
+    const foot = document.createElement('div');
+
+    foot.className = 'card-foot';
+
+    const path = document.createElement('span');
+
+    path.textContent = FOLDER + filename;
+
+    const state = document.createElement('span');
+
+    state.textContent = 'Memuat model...';
+
+
+    // STATUS MODEL
+
+    viewer.addEventListener('load', () => {
+
+        state.textContent = 'Berhasil dimuat';
+
+        state.className = '';
+
+    });
+
+    viewer.addEventListener('error', () => {
+
+        state.textContent = 'Gagal memuat GLB';
+
+        state.className = 'error';
+
+    });
+
+
+    foot.append(path, state);
+
+    card.append(head, viewer, foot);
+
+    return card;
+}
+
+
+// =====================================================
+// RENDER HALAMAN SAAT INI (max 9 model)
+// =====================================================
+
+function renderPage() {
+
+    grid.replaceChildren();
+
+    const total = filteredFiles.length;
+    const totalPages = Math.max(1, Math.ceil(total / PER_PAGE));
+
+    // Pastikan currentPage valid
+    if (currentPage > totalPages) currentPage = totalPages;
+    if (currentPage < 1) currentPage = 1;
+
+    const start = (currentPage - 1) * PER_PAGE;
+    const end = start + PER_PAGE;
+    const pageFiles = filteredFiles.slice(start, end);
+
+    if (pageFiles.length === 0) {
+
+        grid.innerHTML = `
+            <div class="empty">
+                Tidak ada model yang cocok dengan pencarian.
+            </div>
+        `;
+
+    } else {
+
+        const fragment = document.createDocumentFragment();
+
+        pageFiles.forEach((file, i) => {
+            // index global supaya nomor Die Cut tetap sesuai urutan asli
+            const globalIndex = start + i;
+            fragment.appendChild(createCard(file, globalIndex));
+        });
+
+        grid.appendChild(fragment);
+    }
+
+    // Update pagination UI
+    const showPagination = total > PER_PAGE;
+    paginationEl.hidden = !showPagination;
+
+    pageInfoEl.textContent = `Halaman ${currentPage} / ${totalPages}`;
+    prevBtn.disabled = currentPage <= 1;
+    nextBtn.disabled = currentPage >= totalPages;
+
+    // Update status
+    if (searchEl.value.trim()) {
+        statusEl.textContent =
+            `${total} model cocok · menampilkan ${pageFiles.length} di halaman ini`;
+    } else {
+        statusEl.textContent =
+            `Direktori berhasil dibaca · menampilkan ${pageFiles.length} dari ${total}`;
+    }
+}
+
+
+// =====================================================
+// LOAD SEMUA MODEL GLB
+// =====================================================
+
+async function loadModels() {
+
+    reloadBtn.disabled = true;
+    searchEl.value = '';
+    currentPage = 1;
+
+    grid.replaceChildren();
+    paginationEl.hidden = true;
+
+    countEl.textContent = '0 model ditemukan';
+    statusEl.textContent = 'Membaca direktori output_glbs...';
+
+    try {
+
+        allFiles = await getDirectoryFiles();
+        filteredFiles = [...allFiles];
+
+        if (allFiles.length === 0) {
+
+            grid.innerHTML = `
+                <div class="empty">
+
+                    Folder berhasil dibaca, tetapi tidak
+                    ditemukan file dengan pola:
+
+                    <br><br>
+
+                    <code>die_cut_page_1.glb</code>
+
+                    <br>
+
+                    <code>die_cut_page_2.glb</code>
+
+                    <br><br>
+
+                    dan seterusnya.
+
+                </div>
+            `;
+
+            countEl.textContent = '0 model ditemukan';
+            statusEl.textContent = 'Direktori berhasil dibaca';
+
+        } else {
+
+            countEl.textContent = `${allFiles.length} model ditemukan`;
+            renderPage();
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        grid.innerHTML = `
+            <div class="empty error">
+
+                <strong>
+                    Folder output_glbs tidak dapat dibaca.
+                </strong>
+
+                <p>${error.message}</p>
+
+                <p>
+                    Pastikan data.html dan folder output_glbs
+                    berada pada direktori yang sama.
+                </p>
+
+                <p>
+                    Jalankan halaman menggunakan Python HTTP Server.
+                </p>
+
+            </div>
+        `;
+
+        countEl.textContent = '0 model ditemukan';
+        statusEl.textContent = 'Gagal membaca direktori';
+        paginationEl.hidden = true;
+
+    } finally {
+
+        reloadBtn.disabled = false;
+
+    }
+
+}
+
+
+// =====================================================
+// PENCARIAN MODEL
+// =====================================================
+
+function applySearch() {
+
+    const query = searchEl.value.trim().toLowerCase();
+
+    filteredFiles = query
+        ? allFiles.filter(f => f.toLowerCase().includes(query))
+        : [...allFiles];
+
+    currentPage = 1;   // reset ke halaman 1 setiap search
+    renderPage();
+}
+
+
+// =====================================================
+// EVENT
+// =====================================================
+
+searchEl.addEventListener('input', applySearch);
+
+reloadBtn.addEventListener('click', loadModels);
+
+prevBtn.addEventListener('click', () => {
+    if (currentPage > 1) {
+        currentPage--;
+        renderPage();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+});
+
+nextBtn.addEventListener('click', () => {
+    const totalPages = Math.ceil(filteredFiles.length / PER_PAGE);
+    if (currentPage < totalPages) {
+        currentPage++;
+        renderPage();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+});
+
+
+// =====================================================
+// JALANKAN
+// =====================================================
+
+loadModels();
+
+</script>
+
+</body>
+</html>
