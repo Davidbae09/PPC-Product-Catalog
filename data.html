@@ -280,7 +280,7 @@
             </strong>
 
             <span class="muted" id="status">
-                Membaca direktori...
+                Membaca daftar model...
             </span>
         </div>
 
@@ -304,7 +304,7 @@
     <section class="grid" id="grid" aria-live="polite">
 
         <div class="empty">
-            Sedang membaca folder output_glbs...
+            Sedang memuat daftar model...
         </div>
 
     </section>
@@ -329,8 +329,9 @@
 // =====================================================
 
 const FOLDER = './output_glbs/';
+const LIST_URL = FOLDER + 'list.json';   // ← file daftar model
 const PREFIX = 'die_cut_page_';
-const PER_PAGE = 6;   // ← batasi 9 model per halaman
+const PER_PAGE = 6;
 
 const grid = document.getElementById('grid');
 const countEl = document.getElementById('count');
@@ -343,81 +344,48 @@ const nextBtn = document.getElementById('nextPage');
 const pageInfoEl = document.getElementById('pageInfo');
 
 // State
-let allFiles = [];        // semua file dari direktori
-let filteredFiles = [];   // hasil filter search
+let allFiles = [];
+let filteredFiles = [];
 let currentPage = 1;
 
 
 // =====================================================
-// MEMBACA DIREKTORI OUTPUT_GLBS
+// MEMBACA DAFTAR FILE DARI list.json
 // =====================================================
 
 async function getDirectoryFiles() {
 
-    const response = await fetch(FOLDER, {
+    const response = await fetch(LIST_URL, {
         cache: 'no-store'
     });
 
     if (!response.ok) {
         throw new Error(
-            `Direktori tidak dapat dibaca (HTTP ${response.status})`
+            `Tidak dapat membaca list.json (HTTP ${response.status}). Pastikan file output_glbs/list.json sudah di-upload.`
         );
     }
 
-    const html = await response.text();
+    let files = await response.json();
 
-    const doc = new DOMParser().parseFromString(
-        html,
-        'text/html'
-    );
+    if (!Array.isArray(files)) {
+        throw new Error('Format list.json tidak valid. Harus berupa array nama file.');
+    }
 
-    const files = [...doc.querySelectorAll('a[href]')]
-
-        .map(a => {
-
-            try {
-
-                const url = new URL(
-                    a.getAttribute('href'),
-                    location.href
-                );
-
-                return decodeURIComponent(
-                    url.pathname.split('/').filter(Boolean).pop() || ''
-                );
-
-            } catch {
-                return '';
-            }
-
-        })
-
+    // Filter & sort
+    files = files
         .filter(name => {
-
             return (
+                typeof name === 'string' &&
                 name.startsWith(PREFIX) &&
                 name.toLowerCase().endsWith('.glb') &&
                 /^die_cut_page_\d+\.glb$/i.test(name)
             );
-
         })
-
-        .filter((name, index, array) => {
-            return array.indexOf(name) === index;
-        })
-
-        .sort((a, b) => {
-
-            return a.localeCompare(
-                b,
-                undefined,
-                {
-                    numeric: true,
-                    sensitivity: 'base'
-                }
-            );
-
-        });
+        .filter((name, index, array) => array.indexOf(name) === index)
+        .sort((a, b) => a.localeCompare(b, undefined, {
+            numeric: true,
+            sensitivity: 'base'
+        }));
 
     return files;
 }
@@ -430,90 +398,55 @@ async function getDirectoryFiles() {
 function createCard(filename, index) {
 
     const card = document.createElement('article');
-
     card.className = 'card';
-
     card.dataset.filename = filename.toLowerCase();
 
-
     // HEADER
-
     const head = document.createElement('div');
-
     head.className = 'card-head';
 
     const title = document.createElement('strong');
-
     title.textContent = `REAM · Die Cut ${index + 1}`;
 
     const name = document.createElement('span');
-
     name.className = 'filename';
-
     name.textContent = filename;
 
     head.append(title, name);
 
-
     // MODEL VIEWER
-
     const viewer = document.createElement('model-viewer');
-
     viewer.src = FOLDER + encodeURIComponent(filename);
-
     viewer.alt = `Preview 3D ${filename}`;
-
     viewer.setAttribute('camera-controls', '');
-
     viewer.setAttribute('auto-rotate', '');
-
     viewer.setAttribute('shadow-intensity', '1');
-
     viewer.setAttribute('exposure', '1');
-
     viewer.setAttribute('tone-mapping', 'commerce');
-
     viewer.setAttribute('touch-action', 'pan-y');
-
     viewer.setAttribute('loading', 'lazy');
 
-
     // FOOTER
-
     const foot = document.createElement('div');
-
     foot.className = 'card-foot';
 
     const path = document.createElement('span');
-
     path.textContent = FOLDER + filename;
 
     const state = document.createElement('span');
-
     state.textContent = 'Memuat model...';
 
-
-    // STATUS MODEL
-
     viewer.addEventListener('load', () => {
-
         state.textContent = 'Berhasil dimuat';
-
         state.className = '';
-
     });
 
     viewer.addEventListener('error', () => {
-
         state.textContent = 'Gagal memuat GLB';
-
         state.className = 'error';
-
     });
 
-
     foot.append(path, state);
-
     card.append(head, viewer, foot);
 
     return card;
@@ -521,7 +454,7 @@ function createCard(filename, index) {
 
 
 // =====================================================
-// RENDER HALAMAN SAAT INI (max 9 model)
+// RENDER HALAMAN SAAT INI
 // =====================================================
 
 function renderPage() {
@@ -531,7 +464,6 @@ function renderPage() {
     const total = filteredFiles.length;
     const totalPages = Math.max(1, Math.ceil(total / PER_PAGE));
 
-    // Pastikan currentPage valid
     if (currentPage > totalPages) currentPage = totalPages;
     if (currentPage < 1) currentPage = 1;
 
@@ -540,19 +472,15 @@ function renderPage() {
     const pageFiles = filteredFiles.slice(start, end);
 
     if (pageFiles.length === 0) {
-
         grid.innerHTML = `
             <div class="empty">
                 Tidak ada model yang cocok dengan pencarian.
             </div>
         `;
-
     } else {
-
         const fragment = document.createDocumentFragment();
 
         pageFiles.forEach((file, i) => {
-            // index global supaya nomor Die Cut tetap sesuai urutan asli
             const globalIndex = start + i;
             fragment.appendChild(createCard(file, globalIndex));
         });
@@ -560,7 +488,7 @@ function renderPage() {
         grid.appendChild(fragment);
     }
 
-    // Update pagination UI
+    // Pagination
     const showPagination = total > PER_PAGE;
     paginationEl.hidden = !showPagination;
 
@@ -568,13 +496,13 @@ function renderPage() {
     prevBtn.disabled = currentPage <= 1;
     nextBtn.disabled = currentPage >= totalPages;
 
-    // Update status
+    // Status
     if (searchEl.value.trim()) {
         statusEl.textContent =
             `${total} model cocok · menampilkan ${pageFiles.length} di halaman ini`;
     } else {
         statusEl.textContent =
-            `Direktori berhasil dibaca · menampilkan ${pageFiles.length} dari ${total}`;
+            `Daftar berhasil dibaca · menampilkan ${pageFiles.length} dari ${total}`;
     }
 }
 
@@ -593,80 +521,53 @@ async function loadModels() {
     paginationEl.hidden = true;
 
     countEl.textContent = '0 model ditemukan';
-    statusEl.textContent = 'Membaca direktori output_glbs...';
+    statusEl.textContent = 'Membaca daftar model...';
 
     try {
-
         allFiles = await getDirectoryFiles();
         filteredFiles = [...allFiles];
 
         if (allFiles.length === 0) {
-
             grid.innerHTML = `
                 <div class="empty">
-
-                    Folder berhasil dibaca, tetapi tidak
-                    ditemukan file dengan pola:
-
+                    File <code>list.json</code> berhasil dibaca, tetapi tidak ditemukan file dengan pola:
                     <br><br>
-
                     <code>die_cut_page_1.glb</code>
-
                     <br>
-
                     <code>die_cut_page_2.glb</code>
-
                     <br><br>
-
                     dan seterusnya.
-
                 </div>
             `;
-
             countEl.textContent = '0 model ditemukan';
-            statusEl.textContent = 'Direktori berhasil dibaca';
-
+            statusEl.textContent = 'Daftar berhasil dibaca';
         } else {
-
             countEl.textContent = `${allFiles.length} model ditemukan`;
             renderPage();
         }
 
     } catch (error) {
-
         console.error(error);
 
         grid.innerHTML = `
             <div class="empty error">
-
                 <strong>
-                    Folder output_glbs tidak dapat dibaca.
+                    Gagal memuat daftar model.
                 </strong>
-
                 <p>${error.message}</p>
-
                 <p>
-                    Pastikan data.html dan folder output_glbs
-                    berada pada direktori yang sama.
+                    Pastikan file <code>output_glbs/list.json</code> sudah ada dan berisi array nama file GLB.
                 </p>
-
-                <p>
-                    Jalankan halaman menggunakan Python HTTP Server.
-                </p>
-
             </div>
         `;
 
         countEl.textContent = '0 model ditemukan';
-        statusEl.textContent = 'Gagal membaca direktori';
+        statusEl.textContent = 'Gagal membaca daftar model';
         paginationEl.hidden = true;
 
     } finally {
-
         reloadBtn.disabled = false;
-
     }
-
 }
 
 
@@ -675,14 +576,13 @@ async function loadModels() {
 // =====================================================
 
 function applySearch() {
-
     const query = searchEl.value.trim().toLowerCase();
 
     filteredFiles = query
         ? allFiles.filter(f => f.toLowerCase().includes(query))
         : [...allFiles];
 
-    currentPage = 1;   // reset ke halaman 1 setiap search
+    currentPage = 1;
     renderPage();
 }
 
@@ -692,7 +592,6 @@ function applySearch() {
 // =====================================================
 
 searchEl.addEventListener('input', applySearch);
-
 reloadBtn.addEventListener('click', loadModels);
 
 prevBtn.addEventListener('click', () => {
